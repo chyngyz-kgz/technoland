@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './Header.css';
 
 import headerVideo from '../../assets/videos/deaf.mp4';
@@ -6,9 +6,11 @@ import headerLogo from '../../assets/images/technoland-logo.png';
 import { useHistory } from 'react-router';
 import Video from 'react-responsive-video';
 import { Link } from 'react-router-dom';
+import { authContext } from '../../contexts/AuthContext';
 
 const Header = () => {
     const history = useHistory();
+    const { isAuth } = useContext(authContext);
 
     function handleLoginBtn() {
         history.push("/login");
@@ -30,29 +32,35 @@ const Header = () => {
                 <div className="subcontent__navbar">
                     <div className="subcontent__navbar__logo">
                         <img className="navbar__logo" src={headerLogo} alt="ОФ Технолэнд" />
-                        <span>ОФ ТЕХНОЛЭНД</span>
+                        <span className="navbar__logo__title">ОФ ТЕХНОЛЭНД</span>
                     </div>
                     <ul>
                         <li>
-                            <span>ГЛАВНАЯ</span>
+                            <Link to="/">ГЛАВНАЯ</Link>
                         </li>
                         <li>
-                            <span>О НАС</span>
+                            <Link to="/about">О НАС</Link>
                         </li>
                         <li>
-                            <span>НОВОСТИ</span>
+                            <Link to="/news">НОВОСТИ</Link>
                         </li>
                         <li>
-                            <span>КОНТАКТЫ</span>
+                            <Link to="/contacts">КОНТАКТЫ</Link>
                         </li>
                         <li>
-                            <span>НАШИ ПАРТНЕРЫ</span>
+                            <Link to="/partners">НАШИ ПАРТНЕРЫ</Link>
                         </li>
                     </ul>
                     <Link to="/login">
-                        <button className="sign-in-btn">
-                            <span>ВОЙТИ</span>
-                        </button>
+                        {isAuth ? (
+                            <button className="sign-in-btn">
+                                <span>ВЫЙТИ</span>
+                            </button>
+                        ) : (
+                            <button className="sign-in-btn">
+                                <span>ВОЙТИ</span>
+                            </button>
+                        )}
                     </Link>
                 </div>
                 <div className="subcontent">

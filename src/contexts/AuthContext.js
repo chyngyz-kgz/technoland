@@ -66,7 +66,7 @@ const AuthContextProvider = ({ children }) => {
         if (userToken) {
 
             //Добавление токена в качестве headers по умолчанию
-            Axios.defaults.headers.common['Authorization'] = 'bearer ' + cookies.get('techCookie');
+            axios.defaults.headers.common['Authorization'] = 'bearer ' + userToken;
 
             //Отправка данных на сервер для проверки токена
             const { data } = await axios.get(CHECK_AUTH_API);
