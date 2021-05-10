@@ -1,3 +1,4 @@
+import AdminAuthContextProvider from "./contexts/AdminAuthContext";
 import Routes from "./Routes";
 
 function App() {
@@ -6,7 +7,9 @@ function App() {
 
   return (
     <div className="App">
-      <Routes />
+      <AdminAuthContextProvider>
+        <Routes />
+      </AdminAuthContextProvider>
     </div>
   );
 }

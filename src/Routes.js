@@ -9,23 +9,37 @@ import News from './components/News/News';
 import Contacts from './components/Contacts/Contacts';
 import Partners from './components/Partners/Partners';
 import About from './components/About/About';
+import AdminPanel from './components/AdminPanel/AdminPanel';
+import AdminAuthContextProvider from './contexts/AdminAuthContext';
+import EditNews from './components/EditNews/EditNews';
+import EditMaterials from './components/EditMaterials/EditMaterials';
+import AddEvent from './components/AddEvent/AddEvent';
+import AdminNewsContextProvider from './contexts/AdminNewsContext';
 
 const Routes = () => {
     return (
         <AuthContextProvider>
-            <BrowserRouter>
-                <Switch>
-                    <Route exact path="/" component={Home} />
-                    <Route exact path="/login" component={SignIn} />
-                    <Route exact path="/materials" component={Materials} />
-                    <Route exact path="/news" component={News} />
-                    <Route exact path="/contacts" component={Contacts} />
-                    <Route exact path="/partners" component={Partners} />
-                    <Route exact path="/about" component={About} />
-                    <Redirect to="/" />
-                </Switch>
-                <Footer />
-            </BrowserRouter>
+            <AdminAuthContextProvider>
+                <AdminNewsContextProvider>
+                    <BrowserRouter>
+                        <Switch>
+                            <Route exact path="/" component={Home} />
+                            <Route exact path="/login" component={SignIn} />
+                            <Route exact path="/materials" component={Materials} />
+                            <Route exact path="/news" component={News} />
+                            <Route exact path="/contacts" component={Contacts} />
+                            <Route exact path="/partners" component={Partners} />
+                            <Route exact path="/about" component={About} />
+                            <Route exact path="/admin_panel" component={AdminPanel} />
+                            <Route exact path="/edit-news" component={EditNews} />
+                            <Route exact path="/edit-materials" component={EditMaterials} />
+                            <Route exact path="/add-event" component={AddEvent} />
+                            <Redirect to="/" />
+                        </Switch>
+                        <Footer />
+                    </BrowserRouter>
+                </AdminNewsContextProvider>
+            </AdminAuthContextProvider>
         </AuthContextProvider>
     );
 };

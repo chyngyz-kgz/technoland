@@ -37,11 +37,11 @@ const LoginForm = () => {
     return (
         <form onSubmit={handleSubmitClick} className="login-form">
             <div className="email__block">
-                <label>ЭЛ. ПОЧТА</label>
+                <label>ЭЛ. ПОЧТА *</label>
                 <input onChange={changesHandler} name="email" type="text" placeholder="Адрес эл. почты" />
             </div>
             <div className="password__block">
-                <label>ПАРОЛЬ</label>
+                <label>ПАРОЛЬ *</label>
                 <input onChange={changesHandler} name="password" type="password" placeholder="Пароль" />
             </div>
             <button type="submit" className="login-form__btn">Войти</button>

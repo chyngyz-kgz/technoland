@@ -25,6 +25,7 @@
   font-size: 12px;
   font-weight: 700;
   margin: 5px 0;
+  color: #7c6f6f;
 }
 
 .password__block > input,
@@ -34,7 +35,7 @@
   font-size: 16px;
   outline: none;
   cursor: pointer;
-  border: 1px #1f4b78 solid;
+  border: 1px #7c6f6f solid;
   border-radius: 5px;
   color: #7c6f6f;
   background-color: white;

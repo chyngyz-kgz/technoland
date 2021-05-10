@@ -1,0 +1,79 @@
+.add-event__form {
+  border-radius: 5px;
+  padding-bottom: 10px;
+  width: 70%;
+  background-color: #f4f7f8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.form__title {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background-color: orange;
+}
+
+.add-event__form label {
+  width: 80%;
+  text-align: left;
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #7c6f6f;
+}
+
+.add-event__form input {
+  width: 80%;
+  height: 45px;
+  font-size: 16px;
+  outline: none;
+  cursor: pointer;
+  border: 1px #7c6f6f solid;
+  border-radius: 5px;
+  color: #7c6f6f;
+  background-color: white;
+}
+
+.add-event__form input::placeholder {
+  font-size: 16px;
+  color: gray;
+}
+
+.add-event__form textarea {
+  width: 80%;
+  height: 30vh;
+  font-size: 16px;
+  outline: none;
+  cursor: pointer;
+  border: 1px #7c6f6f solid;
+  border-radius: 5px;
+  color: #7c6f6f;
+  background-color: white;
+}
+
+.add-event__form textarea::placeholder {
+  font-size: 16px;
+  color: gray;
+}
+
+.add-event__form button {
+  margin: 10px;
+  width: 80%;
+  height: 60px;
+  font-size: 22px;
+  font-weight: 500;
+  background-color: orange;
+  color: white;
+  outline: none;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  transition: 300ms;
+}
+
+.add-event__form button:hover {
+  background-color: rgb(226, 159, 35);
+  color: white;
+}

@@ -1,0 +1,12 @@
+.news__container {
+  min-height: 50vh;
+  width: 70%;
+  margin: 10vh auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.news__title {
+  color: #574339;
+  font-weight: 700;
+}
