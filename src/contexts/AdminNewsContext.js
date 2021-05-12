@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useReducer } from 'react';
-import { ADD_EVENT_API } from '../helpers/constants';
+import { ADD_EVENT_API, UPDATE_EVENT_API, DELETE_EVENT_API } from '../helpers/constants';
 
 export const adminNewsContext = React.createContext();
 
@@ -32,9 +32,30 @@ const AdminNewsContextProvider = ({ children }) => {
         }
     }
 
+    async function editEvent(editedEvent) {
+        try {
+            const { data } = await axios.post(UPDATE_EVENT_API, editedEvent);
+            console.log(data);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    async function deleteEvent(id) {
+        const dataToDelete = { id }
+        try {
+            const { data } = await axios.post(DELETE_EVENT_API, dataToDelete);
+            console.log(data);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
     return (
         <adminNewsContext.Provider value={{
-            postEvent
+            postEvent,
+            editEvent,
+            deleteEvent
         }}>
             {children}
         </adminNewsContext.Provider>

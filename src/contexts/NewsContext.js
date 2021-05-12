@@ -1,100 +1,139 @@
 import axios from 'axios';
 import React, { useReducer } from 'react';
-import { AUTH_API, CHECK_AUTH_API, Axios } from '../helpers/constants';
-import Cookies from 'universal-cookie';
+import { GET_NEWS_API, GET_NEWS_DETAILS_API, ADD_COMMENT_API } from '../helpers/constants';
 
-export const authContext = React.createContext();
+export const newsContext = React.createContext();
 
 const INIT_STATE = {
-    isAuth: false,
+    news: null,
+    newsDetails: null,
+    totalPages: 1,
+    favourites: null
 }
 
 const reducer = (state = INIT_STATE, action) => {
     switch (action.type) {
-        case "GET_AUTH_INFO":
+        case "GET_NEWS":
             return {
                 ...state,
-                isAuth: action.payload
+                totalPages: action.payload.totalPages,
+                news: action.payload
+            }
+        case "GET_NEWS_DETAILS":
+            return {
+                ...state,
+                newsDetails: action.payload
+            }
+        case "GET_FAVOURITES":
+            return {
+                ...state,
+                favourites: action.payload
+            }
+        case "GET_NEWS_COMMENTS":
+            return {
+                ...state,
+                newsComments: action.payload
             }
         default:
             return state
     }
 }
 
-const AuthContextProvider = ({ children }) => {
-    const [state, dispatch] = useReducer(reducer, INIT_STATE);
-    const cookies = new Cookies();
+const NewsContextProvider = ({ children }) => {
 
-    async function registerUser(event, history) {
-        event.preventDefault();
-        const newUser = {
-            email: event.target[0].value,
-            password: event.target[2].value
-        }
-
-        try {
-            const res = await axios.post(`${AUTH_API}/api/auth/register`, newUser);
-            cookies.set('');
-            history.push("/login");
-        } catch (err) {
-            console.log(err);
-        }
-
+    async function getNews() {
+        const { data } = await axios.get(`${GET_NEWS_API}${window.location.search}`);
+        console.log(data);
+        dispatch({
+            type: "GET_NEWS",
+            payload: data
+        });
     }
 
-    async function loginUser(userData, history) {
-        try {
-            const { data } = await axios.post(`${AUTH_API}`, userData);
-            if (data.success && data.token) {
-                cookies.set('techCookie', JSON.stringify(data.token));
-                dispatch({
-                    type: "GET_AUTH_INFO",
-                    payload: true
-                });
-                history.push("/materials");
-            }
-            console.log(data);
-        } catch (err) {
-            console.log(err);
-        }
-
+    async function getNewsDetails(id) {
+        const { data } = await axios.get(`${GET_NEWS_DETAILS_API}?id=${id}`);
+        console.log(data);
+        dispatch({
+            type: "GET_NEWS_DETAILS",
+            payload: data.news[0]
+        });
+        dispatch({
+            type: "GET_NEWS_COMMENTS",
+            payload: JSON.parse(data.news[0].comments)
+        });
     }
 
-    async function isUserLogedIn(history) {
-        const userToken = cookies.get('techCookie');
+    function addToFavourites(newFavouriteNews) {
+        let favourites = JSON.parse(localStorage.getItem('favouriteNews'));
 
-        if (userToken) {
+        if (!favourites) {
+            favourites = []
+        }
 
-            //Добавление токена в качестве headers по умолчанию
-            axios.defaults.headers.common['Authorization'] = 'bearer ' + userToken;
-
-            //Отправка данных на сервер для проверки токена
-            const { data } = await axios.get(CHECK_AUTH_API);
-
-            if (data.success && data.user) {
-                dispatch({
-                    type: "GET_AUTH_INFO",
-                    payload: true
-                });
-            } else {
-                history.push("/login");
-            }
-            console.log(data);
+        let filteredFavourites = favourites.filter(elem => elem.news_id === newFavouriteNews.news_id);
+        if (filteredFavourites.length > 0) {
+            favourites = favourites.filter(elem => elem.news_id !== newFavouriteNews.news_id)
         } else {
-            history.push("/login");
+            favourites.push(newFavouriteNews);
         }
+
+        console.log(favourites);
+        localStorage.setItem('favouriteNews', JSON.stringify(favourites));
+        getNews();
     }
 
+    function checkNewsInFavourites(id) {
+        let favourites = JSON.parse(localStorage.getItem('favouriteNews'));
+        if (!favourites) {
+            favourites = []
+        };
+
+        let newFavourites = favourites.filter(elem => elem.news_id === id);
+
+        return newFavourites.length > 0 ? true : false
+    }
+
+    function getFavourites() {
+        let favourites = JSON.parse(localStorage.getItem('favouriteNews'));
+        if (!favourites) {
+            favourites = []
+        }
+        dispatch({
+            type: "GET_FAVOURITES",
+            payload: favourites
+        });
+    };
+
+    async function addComment(id, comment) {
+        const { data } = await axios.get(`${GET_NEWS_DETAILS_API}?id=${id}`);
+        let oldComments = JSON.parse(data.news[0].comments)
+        if (!oldComments) {
+            oldComments = [];
+        }
+        oldComments.push(comment);
+
+        const { response } = await axios.post(ADD_COMMENT_API, { news_id: id, comments: JSON.stringify(oldComments) });
+        getNewsDetails();
+    }
+
+    const [state, dispatch] = useReducer(reducer, INIT_STATE);
     return (
-        <authContext.Provider value={{
-            isAuth: state.isAuth,
-            registerUser,
-            loginUser,
-            isUserLogedIn
+        <newsContext.Provider value={{
+            news: state.news,
+            newsDetails: state.newsDetails,
+            totalPages: state.totalPages,
+            favourites: state.favourites,
+            newsComments: state.newsComments,
+            getNews,
+            getNewsDetails,
+            addToFavourites,
+            checkNewsInFavourites,
+            getFavourites,
+            addComment
         }}>
             {children}
-        </authContext.Provider>
+        </newsContext.Provider>
     )
 }
 
-export default AuthContextProvider;
+export default NewsContextProvider;

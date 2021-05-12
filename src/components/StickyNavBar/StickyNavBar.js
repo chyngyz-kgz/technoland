@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './StickyNavBar.css'
 
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 import headerLogo from '../../assets/images/technoland-logo.png';
 import CallIcon from '@material-ui/icons/Call';
 import { Link } from 'react-router-dom';
+import { authContext } from '../../contexts/AuthContext';
 
 const StickyNavBar = () => {
+    const { isAuth } = useContext(authContext);
     let [navBar, setNavBar] = useState(false);
 
     function handleScroll() {
@@ -28,7 +30,7 @@ const StickyNavBar = () => {
                 <div className="stycky-navbar__actions">
                     <span className="stycky-navbar__link"><CallIcon />0772-322-652</span>
                     <span className="stycky-navbar__link"><WhatsAppIcon />WhatsApp</span>
-                    <Link to="/login" className="stycky-navbar__login-btn">ВОЙТИ</Link>
+                    <Link to="/login" className="stycky-navbar__login-btn">{isAuth ? "Выйти" : "Войти"}</Link>
                 </div>
             </div>
         </div>

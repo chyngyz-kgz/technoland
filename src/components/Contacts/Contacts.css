@@ -117,3 +117,24 @@
 .form__submit-btn:hover {
   background-color: rgb(226, 159, 35);
 }
+
+@media screen and (max-width: 500px) {
+  .contact__title {
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .form__inputs {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .form__input__container {
+    width: 95%;
+  }
+
+  .contacts__form {
+    width: 95%;
+  }
+}

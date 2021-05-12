@@ -28,6 +28,7 @@ const Footer = () => {
                     <div className="footer__menu__block">
                         <span className="footer__menu__title">НОВОСТИ</span>
                         <span className="footer__menu__link">Лента</span>
+                        <Link to="favourite-news"><span className="footer__menu__link">Избранное</span></Link>
                     </div>
                     <div className="footer__menu__block">
                         <span className="footer__menu__title">МЫ В СОЦСЕТЯХ</span>

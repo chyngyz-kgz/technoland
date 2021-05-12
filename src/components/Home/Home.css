@@ -49,3 +49,13 @@
   color: #4c6783;
   border-color: #4c6783;
 }
+
+@media only screen and (max-width: 600px) {
+  .our-tasks__section {
+    flex-direction: column;
+    align-items: center;
+  }
+  .our-task__block {
+    width: 90%;
+  }
+}

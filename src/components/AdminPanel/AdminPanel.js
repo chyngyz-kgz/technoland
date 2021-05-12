@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 const AdminPanel = () => {
 
-    const { isAdminLogedIn, isAdminAuth, loginAdmin, admin } = useContext(adminAuthContext);
+    const { isAdminLogedIn, loginAdmin, admin } = useContext(adminAuthContext);
 
     const initialState = {
         adminData: {
@@ -47,7 +47,7 @@ const AdminPanel = () => {
                 <div className="admin-panel__container">
                     <span className="admin-panel__title">Здравствуйте, {admin.name}</span>
                     <div className="btns-container">
-                        <Link to="edit-news"><span className="admin-panel__btn">НОВОСТИ</span></Link>
+                        <Link to="admin-panel-news"><span className="admin-panel__btn">НОВОСТИ</span></Link>
                         <Link to="edit-materials"><span className="admin-panel__btn">МАТЕРИАЛЫ ДЛЯ СКАЧИВАНИЯ</span></Link>
                     </div>
                 </div>

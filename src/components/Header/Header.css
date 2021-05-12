@@ -110,3 +110,37 @@
   font-size: 20px;
   font-weight: 700;
 }
+
+/* Burger menu */
+.subcontent__navbar .icon {
+  display: none;
+  color: white;
+}
+
+@media screen and (max-width: 1300px) {
+  .subcontent__navbar ul,
+  .navbar__log-in-out-btn {
+    display: none;
+  }
+  .subcontent__navbar {
+    width: 95%;
+  }
+  .subcontent__navbar a.icon {
+    float: right;
+    display: block;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .subcontent__title {
+    font-size: 17px;
+  }
+
+  .subcontent__description {
+    font-size: 15px;
+  }
+
+  .subcontent {
+    width: 95%;
+  }
+}

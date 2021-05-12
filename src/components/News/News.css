@@ -1,12 +1,21 @@
 .news__container {
   min-height: 50vh;
   width: 70%;
-  margin: 10vh auto;
+  margin: 10vh auto 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 .news__title {
   color: #574339;
-  font-weight: 700;
+  font-weight: 500;
+  font-size: 24px;
+}
+
+.progress__container {
+  height: 50vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

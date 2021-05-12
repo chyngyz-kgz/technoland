@@ -6,17 +6,11 @@ import Cookies from 'universal-cookie';
 export const adminAuthContext = React.createContext();
 
 const ADMIN_INIT_STATE = {
-    isAdminAuth: false,
     admin: null
 }
 
 const reducer = (state = ADMIN_INIT_STATE, action) => {
     switch (action.type) {
-        case "GET_ADMIN_AUTH_INFO":
-            return {
-                ...state,
-                isAdminAuth: action.payload
-            }
         case "GET_ADMIN_INFO":
             return {
                 ...state,
@@ -37,8 +31,8 @@ const AdminAuthContextProvider = ({ children }) => {
             if (data.success && data.token) {
                 cookies.set('techAdminCookie', JSON.stringify(data.token));
                 dispatch({
-                    type: "GET_ADMIN_AUTH_INFO",
-                    payload: true
+                    type: "GET_ADMIN_INFO",
+                    payload: data.user
                 });
             }
             console.log(data);
@@ -60,10 +54,6 @@ const AdminAuthContextProvider = ({ children }) => {
 
             if (data.success && data.user) {
                 dispatch({
-                    type: "GET_ADMIN_AUTH_INFO",
-                    payload: true
-                });
-                dispatch({
                     type: "GET_ADMIN_INFO",
                     payload: data.user
                 });
@@ -74,7 +64,6 @@ const AdminAuthContextProvider = ({ children }) => {
 
     return (
         <adminAuthContext.Provider value={{
-            isAdminAuth: state.isAdminAuth,
             admin: state.admin,
             loginAdmin,
             isAdminLogedIn

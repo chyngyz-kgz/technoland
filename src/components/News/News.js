@@ -1,32 +1,104 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './News.css'
 import NavBar from '../NavBar/NavBar';
 import NewsCard from '../NewsCard/NewsCard'
+import { newsContext } from '../../contexts/NewsContext';
+
+import { CircularProgress, FormControlLabel, makeStyles, Radio, RadioGroup } from '@material-ui/core';
+import Pagination from '@material-ui/lab/Pagination';
+import { useHistory } from 'react-router';
+
+const useStyles = makeStyles(theme => ({
+
+    pagination: {
+        // margin: 'auto',
+        // padding: 'auto'
+    }
+}));
 
 const News = () => {
+    const { getNews, news, totalPages } = useContext(newsContext);
+    const history = useHistory();
+    const [page, setPage] = useState(getPage());
+    const classes = useStyles();
+    const [newsType, setNewsType] = useState();
 
-    let newsArr = [
-        {
-            title: "Проведен семинар для родителей учащихся школы-интернат для глухих детей КР",
-            date: "September 29, 2020",
-            description: "По инициативе директора специальной общеобразовательной школы-интернат для глухих детей КР Джаманбаевой Каныкей Джузумалиевны 18.09 был проведен семинар для родителей детей нулевого и первого класса. Родителям были представлены результаты проекта «Вовлечение детей с нарушением слуха к системам цифрового обучения», которое было поддержано ПРООН в КР в рамках программы «Вызов открытым инновациям-4KG». На семинаре также присутствовали Торага Кыргызского общества слепых и глухих, замместитель торага Жапаров Канатбек, а также представители СМИ. Директор школы Джаманбаева К.Дж. призвала родителей активно пользоваться мобильными и web-разработками, так как только совместными усилиями школы и родителей, можно достигнуть хороших результатов в обучении детей. Президент КОС и КОГ рассказал родителям о деятельности общества, возможности трудоустройства детей в будущем и о предстоящих планах. Жапаров Канатбек, сам является инвалидом по слуху, закончил школу для детей с нарушением слуха и не понаслышке знает проблемы детей с подобными сенсорными нарушениями."
-        },
-        {
-            title: "Семинар для учителей Общеобразовательной школы для глухих детей КР",
-            date: "September 18, 2020",
-            description: "15.09.2020 в специальной общеобразовательной школе для глухих детей КР прошел семинар по результатам проекта «Вовлечение детей с нарушением слуха к система цифрового обучения» по программе «Вызов открытым инновациям-4KG», ПРООН в КР. На семинаре также присутствовали представители СДОО № 48."
+    useEffect(() => {
+        getNews();
+    }, []);
+
+    function getPage() {
+        const search = new URLSearchParams(history.location.search);
+        return search.get("page") ? search.get("page") : 1;
+    }
+
+    function handlePage(event, page) {
+        const search = new URLSearchParams(history.location.search);
+        search.set("page", page);
+        history.push(`${history.location.pathname}?${search.toString()}`);
+        getNews();
+        setPage(page);
+    }
+
+    function handleChangeNewsType(event) {
+        if (event.target.value === "Все") {
+            history.push(`${history.location.pathname.replace("category")}`);
+            getNews();
+            return;
         }
-    ]
+        const search = new URLSearchParams(history.location.search);
+        search.set("category", event.target.value);
+        history.push(`${history.location.pathname}?${search.toString()}`);
+        getNews();
+        setNewsType(event.target.value);
+    }
 
     return (
         <>
             <NavBar />
+
             <div className="news__container">
-                <span>НОВОСТИ</span>
+                <span className="news__title">НОВОСТИ</span>
                 {
-                    newsArr.map(elem => (
-                        <NewsCard title={elem.title} description={elem.description} />
-                    ))
+                    news ?
+                        (
+                            <>
+                                {
+                                    news.news.map(elem => (
+                                        <NewsCard key={elem.news_id} image={elem.image} id={elem.news_id} title={elem.title} description={elem.description.slice(0, 300) + '...'} />
+                                    ))
+                                }
+                                <RadioGroup
+                                    value={newsType}
+                                    onChange={handleChangeNewsType}
+                                    aria-label="newstype"
+                                    name="newstype"
+                                >
+                                    <FormControlLabel
+                                        value="Образование"
+                                        control={<Radio />}
+                                        label="Образование"
+                                    />
+                                    <FormControlLabel
+                                        value="Политика"
+                                        control={<Radio />}
+                                        label="Политика"
+                                    />
+                                    <FormControlLabel
+                                        value="Все"
+                                        control={<Radio />}
+                                        label="Все"
+                                    />
+                                </RadioGroup>
+                                <Pagination className={classes.pagination} page={+page} onChange={handlePage} count={totalPages} color="#c4ab9d" />
+                            </>
+                        )
+                        :
+                        (
+                            <div className="progress__container">
+                                <CircularProgress />
+                            </div>
+                        )
                 }
             </div>
         </>

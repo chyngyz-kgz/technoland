@@ -16,6 +16,16 @@ const Header = () => {
         history.push("/login");
     }
 
+    function myFunction(event) {
+        event.preventDefault();
+        let x = document.getElementById("myTopnav");
+        if (x.className === "subcontent__navbar") {
+            x.className += " responsive";
+        } else {
+            x.className = "subcontent__navbar";
+        }
+    }
+
     return (
         <div className="header">
 
@@ -24,12 +34,9 @@ const Header = () => {
                 mp4={headerVideo}
                 objectFit={`cover`}
             />
-            {/* <video className="video" autoPlay="autoplay" loop="loop" muted>
-                <source src={headerVideo} type="video/mp4" />
-            </video> */}
 
             <div className="content">
-                <div className="subcontent__navbar">
+                <div className="subcontent__navbar" id="myTopnav">
                     <div className="subcontent__navbar__logo">
                         <img className="navbar__logo" src={headerLogo} alt="ОФ Технолэнд" />
                         <span className="navbar__logo__title">ОФ ТЕХНОЛЭНД</span>
@@ -51,7 +58,7 @@ const Header = () => {
                             <Link to="/partners">НАШИ ПАРТНЕРЫ</Link>
                         </li>
                     </ul>
-                    <Link to="/login">
+                    <Link className="navbar__log-in-out-btn" to="/login">
                         {isAuth ? (
                             <button className="sign-in-btn">
                                 <span>ВЫЙТИ</span>
@@ -62,6 +69,9 @@ const Header = () => {
                             </button>
                         )}
                     </Link>
+                    <a href="javascript:void(0);" className="icon" onclick={myFunction}>
+                        МЕНЮ
+                    </a>
                 </div>
                 <div className="subcontent">
                     <p className="subcontent__title">Мы верим в мир, в котором каждый ребёнок имеет доступ к образованию.</p>
