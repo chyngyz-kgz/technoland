@@ -68,7 +68,8 @@
 }
 
 @media screen and (max-width: 720px) {
-  .stycky-navbar__actions {
+  .stycky-navbar__link,
+  .stycky-navbar__search-inp {
     display: none;
   }
 }

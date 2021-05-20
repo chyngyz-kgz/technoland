@@ -46,6 +46,7 @@
 
 .footer__horizontal-line {
   border-top: 1px #bb9e8d solid;
+  margin-top: 10px;
 }
 
 .footer__info__block__text {

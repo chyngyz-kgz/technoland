@@ -1,5 +1,6 @@
 import { CircularProgress } from '@material-ui/core';
 import React, { useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
 import { adminNewsContext } from '../../contexts/AdminNewsContext';
 import { newsContext } from '../../contexts/NewsContext';
 import NavBar from '../NavBar/NavBar';
@@ -9,6 +10,7 @@ const EditNews = (props) => {
     const { getNewsDetails, newsDetails } = useContext(newsContext);
     const { editEvent } = useContext(adminNewsContext);
     const [formData, setFormData] = useState({ ...newsDetails });
+    const history = useHistory();
 
     function handleChanges(event) {
         setFormData(
@@ -21,7 +23,7 @@ const EditNews = (props) => {
 
     function handleSubmit(event) {
         event.preventDefault();
-        editEvent(formData);
+        editEvent(formData, history);
     }
 
     useEffect(() => {

@@ -41,6 +41,13 @@
   background-color: white;
 }
 
+.email__block > input[type="text"],
+.password__block > input[type="password"],
+.password__block > input[type="text"] {
+  box-sizing: border-box;
+  padding-left: 10px;
+}
+
 .password__block > input::placeholder,
 .email__block > input::placeholder {
   font-size: 16px;

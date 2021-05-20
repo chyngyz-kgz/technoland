@@ -2,9 +2,11 @@ import React, { useContext, useState } from 'react';
 import './AddEvent.css'
 import NavBar from '../NavBar/NavBar';
 import { adminNewsContext } from '../../contexts/AdminNewsContext';
+import { useHistory } from 'react-router';
 
 const AddEvent = () => {
     const { postEvent } = useContext(adminNewsContext);
+    const history = useHistory();
     const [formData, setFormData] = useState(
         {
             title: '',
@@ -27,7 +29,7 @@ const AddEvent = () => {
 
     function handleSubmit(event) {
         event.preventDefault();
-        postEvent(formData);
+        postEvent(formData, history);
     }
 
     return (

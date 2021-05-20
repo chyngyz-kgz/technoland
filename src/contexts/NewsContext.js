@@ -105,15 +105,20 @@ const NewsContextProvider = ({ children }) => {
     };
 
     async function addComment(id, comment) {
-        const { data } = await axios.get(`${GET_NEWS_DETAILS_API}?id=${id}`);
-        let oldComments = JSON.parse(data.news[0].comments)
-        if (!oldComments) {
-            oldComments = [];
-        }
-        oldComments.push(comment);
+        try {
+            const { data } = await axios.get(`${GET_NEWS_DETAILS_API}?id=${id}`);
+            let oldComments = JSON.parse(data.news[0].comments)
+            if (!oldComments) {
+                oldComments = [];
+            }
+            oldComments.push(comment);
 
-        const { response } = await axios.post(ADD_COMMENT_API, { news_id: id, comments: JSON.stringify(oldComments) });
-        getNewsDetails();
+            const { response } = await axios.post(ADD_COMMENT_API, { news_id: id, comments: JSON.stringify(oldComments) });
+        } catch (err) {
+            console.log(err);
+        }
+
+        getNewsDetails(id);
     }
 
     const [state, dispatch] = useReducer(reducer, INIT_STATE);

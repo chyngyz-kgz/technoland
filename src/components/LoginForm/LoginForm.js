@@ -18,6 +18,7 @@ const LoginForm = () => {
     }
 
     const [state, setState] = useState(initialState);
+    const [passwordInpType, setpasswordInpType] = useState("password");
 
     function changesHandler(event) {
         setState({
@@ -34,6 +35,10 @@ const LoginForm = () => {
         loginUser(state.userData, history)
     }
 
+    function toggleInpType() {
+        passwordInpType === "password" ? setpasswordInpType("text") : setpasswordInpType("password");
+    }
+
     return (
         <form onSubmit={handleSubmitClick} className="login-form">
             <div className="email__block">
@@ -42,7 +47,8 @@ const LoginForm = () => {
             </div>
             <div className="password__block">
                 <label>ПАРОЛЬ *</label>
-                <input onChange={changesHandler} name="password" type="password" placeholder="Пароль" />
+                <input onChange={changesHandler} name="password" type={passwordInpType} placeholder="Пароль" />
+                <label><input type="checkbox" onClick={toggleInpType} />Показать пароль</label>
             </div>
             <button type="submit" className="login-form__btn">Войти</button>
         </form>

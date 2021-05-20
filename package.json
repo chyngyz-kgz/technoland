@@ -1,5 +1,6 @@
 {
-  "name": "makers_graduation-work",
+  "name": "technoland",
+  "homepage": "http://technoland-pf.kg/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

@@ -8,3 +8,5 @@ export const GET_NEWS_DETAILS_API = 'http://technoland/get-news-details.php';
 export const UPDATE_EVENT_API = 'http://technoland/admin/edit-news.php';
 export const DELETE_EVENT_API = 'http://technoland/admin/delete-news.php';
 export const ADD_COMMENT_API = 'http://technoland/add-comment.php';
+export const ADD_MATERIAL_API = 'http://technoland/admin/upload-file.php';
+export const GET_MATERIALS_API = 'http://technoland/get-materials.php';

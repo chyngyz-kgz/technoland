@@ -4,7 +4,7 @@ import NavBar from '../NavBar/NavBar';
 import NewsCard from '../NewsCard/NewsCard'
 import { newsContext } from '../../contexts/NewsContext';
 
-import { CircularProgress, FormControlLabel, makeStyles, Radio, RadioGroup } from '@material-ui/core';
+import { CircularProgress, makeStyles } from '@material-ui/core';
 import Pagination from '@material-ui/lab/Pagination';
 import { useHistory } from 'react-router';
 
@@ -21,7 +21,6 @@ const News = () => {
     const history = useHistory();
     const [page, setPage] = useState(getPage());
     const classes = useStyles();
-    const [newsType, setNewsType] = useState();
 
     useEffect(() => {
         getNews();
@@ -40,19 +39,6 @@ const News = () => {
         setPage(page);
     }
 
-    function handleChangeNewsType(event) {
-        if (event.target.value === "Все") {
-            history.push(`${history.location.pathname.replace("category")}`);
-            getNews();
-            return;
-        }
-        const search = new URLSearchParams(history.location.search);
-        search.set("category", event.target.value);
-        history.push(`${history.location.pathname}?${search.toString()}`);
-        getNews();
-        setNewsType(event.target.value);
-    }
-
     return (
         <>
             <NavBar />
@@ -68,28 +54,6 @@ const News = () => {
                                         <NewsCard key={elem.news_id} image={elem.image} id={elem.news_id} title={elem.title} description={elem.description.slice(0, 300) + '...'} />
                                     ))
                                 }
-                                <RadioGroup
-                                    value={newsType}
-                                    onChange={handleChangeNewsType}
-                                    aria-label="newstype"
-                                    name="newstype"
-                                >
-                                    <FormControlLabel
-                                        value="Образование"
-                                        control={<Radio />}
-                                        label="Образование"
-                                    />
-                                    <FormControlLabel
-                                        value="Политика"
-                                        control={<Radio />}
-                                        label="Политика"
-                                    />
-                                    <FormControlLabel
-                                        value="Все"
-                                        control={<Radio />}
-                                        label="Все"
-                                    />
-                                </RadioGroup>
                                 <Pagination className={classes.pagination} page={+page} onChange={handlePage} count={totalPages} color="#c4ab9d" />
                             </>
                         )

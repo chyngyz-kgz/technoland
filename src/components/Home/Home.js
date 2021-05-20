@@ -3,6 +3,7 @@ import './Home.css'
 import Activities from '../Activities/Activities';
 import Header from '../Header/Header';
 import StickyNavBar from '../StickyNavBar/StickyNavBar';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
 
@@ -12,7 +13,7 @@ const Home = () => {
             <Header />
             <div className="our-mission">
                 <div className="our-mission__container">
-                    <h1>ЦЕЛИ И ЗАДАЧИ ФОНДА</h1>
+                    <h1 className="our-mission__container__title">ЦЕЛИ И ЗАДАЧИ ФОНДА</h1>
                     <div className="our-tasks__section">
                         <div className="our-task__block">
                             <span>Содействие развитию потенциала в области ИКТ для достижения целей Устойчивого развития.</span>
@@ -27,7 +28,7 @@ const Home = () => {
                             <span>Повышение уровня знания населения в области ИКТ.</span>
                         </div>
                     </div>
-                    <span className="our-mission__more-btn">ПОДРОБНЕЕ</span>
+                    <Link to="about" className="our-mission__more-btn"><span>ПОДРОБНЕЕ</span></Link>
                 </div>
             </div>
             <Activities />

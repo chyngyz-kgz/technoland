@@ -19,6 +19,11 @@ const NewsDetails = (props) => {
 
     }
 
+    function handleAddCommentBtn(news_id, inputValue) {
+        addComment(news_id, inputValue);
+        setInputValue('');
+    }
+
     return (
         <>
             <NavBar />
@@ -56,7 +61,7 @@ const NewsDetails = (props) => {
                                     }
                                     <div className="comments-actions">
                                         <TextField onChange={handleInpChange} value={inputValue} id="standard-basic" label="Оставить комментарий" />
-                                        <span onClick={() => addComment(newsDetails.news_id, inputValue)} style={{ width: "20vw", textAlign: "center" }} className="admin-panel__btn">Отправить</span>
+                                        <span onClick={() => handleAddCommentBtn(newsDetails.news_id, inputValue)} style={{ width: "20vw", textAlign: "center" }} className="admin-panel__btn">Отправить</span>
                                     </div>
                                 </div>
                             </div>

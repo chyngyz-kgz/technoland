@@ -23,19 +23,22 @@ const reducer = (state = INIT_STATE, action) => {
 const AdminNewsContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, INIT_STATE);
 
-    async function postEvent(newEvent) {
+    async function postEvent(newEvent, history) {
         try {
             const { data } = await axios.post(ADD_EVENT_API, newEvent);
             console.log(data);
+
+            history.push("/admin-panel-news");
         } catch (err) {
             console.log(err);
         }
     }
 
-    async function editEvent(editedEvent) {
+    async function editEvent(editedEvent, history) {
         try {
             const { data } = await axios.post(UPDATE_EVENT_API, editedEvent);
             console.log(data);
+            history.push("/admin-panel-news");
         } catch (err) {
             console.log(err);
         }

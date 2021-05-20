@@ -64,3 +64,10 @@
 .navbar__login-btn:hover {
   background-color: #3b638a;
 }
+
+@media screen and (max-width: 720px) {
+  .navbar__link,
+  .navbar__search-inp {
+    display: none;
+  }
+}

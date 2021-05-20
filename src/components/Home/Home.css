@@ -13,10 +13,12 @@
   align-items: center;
 }
 
-.our-mission__container h1 {
+.our-mission__container__title {
   font-weight: 700;
   font-size: 16px;
   color: orange;
+  padding-bottom: 10px;
+  border-bottom: #003366 2px solid;
 }
 
 .our-tasks__section {

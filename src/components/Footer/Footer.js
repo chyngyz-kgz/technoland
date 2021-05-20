@@ -17,6 +17,7 @@ const Footer = () => {
                         <span className="footer__menu__title">ОФ ТЕХНОЛЭНД</span>
                         <Link to="/about" className="footer__menu__link">О нас</Link>
                         <Link to="/partners" className="footer__menu__link">Наши партнеры</Link>
+                        <Link to="/materials" className="footer__menu__link">Материалы <br />для скачивания</Link>
                     </div>
                     <div className="footer__menu__block">
                         <span className="footer__menu__title">КАК СВЯЗАТЬСЯ?</span>
@@ -27,8 +28,8 @@ const Footer = () => {
                     </div>
                     <div className="footer__menu__block">
                         <span className="footer__menu__title">НОВОСТИ</span>
-                        <span className="footer__menu__link">Лента</span>
-                        <Link to="favourite-news"><span className="footer__menu__link">Избранное</span></Link>
+                        <Link to="/news"><span className="footer__menu__link">Лента</span></Link>
+                        <Link to="/favourite-news"><span className="footer__menu__link">Избранное</span></Link>
                     </div>
                     <div className="footer__menu__block">
                         <span className="footer__menu__title">МЫ В СОЦСЕТЯХ</span>

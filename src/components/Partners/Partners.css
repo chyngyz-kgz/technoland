@@ -59,18 +59,3 @@
   font-size: 25px;
   color: #bb9e8d;
 }
-
-@media screen and (max-width: 1000px) {
-  .partner__section {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .partner__info__title {
-    font-size: 16px;
-  }
-
-  .partner__logo {
-    margin-top: 1vh;
-  }
-}

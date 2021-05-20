@@ -23,6 +23,10 @@ const AdminPanel = () => {
         isAdminLogedIn();
     }, []);
 
+    useEffect(() => {
+        isAdminLogedIn();
+    }, [loginAdmin])
+
 
 
     function changesHandler(event) {
