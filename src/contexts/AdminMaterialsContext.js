@@ -1,11 +1,12 @@
 import axios from 'axios';
 import React, { useReducer } from 'react';
+import { useState } from 'react';
 import { ADD_MATERIAL_API } from '../helpers/constants';
 
 export const adminMaterialsContext = React.createContext();
 
 const INIT_STATE = {
-    materials: [],
+    materials: []
 }
 
 
@@ -23,11 +24,18 @@ const reducer = (state = INIT_STATE, action) => {
 
 const AdminMaterialsContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, INIT_STATE);
+    const [progress, setProgress] = useState();
 
     async function uploadFile(formData) {
+        console.log(formData);
         try {
             const { data } = await axios.post(ADD_MATERIAL_API, formData, {
-                'content-type': 'multipart/form-data'
+                headers: { 'content-type': 'multipart/form-data' },
+                onUploadProgress: data => {
+                    //Set the progress value to show the progress bar
+                    setProgress(Math.round((100 * data.loaded) / data.total));
+                    console.log(progress);
+                },
             });
             console.log(data);
         } catch (err) {
@@ -37,6 +45,7 @@ const AdminMaterialsContextProvider = ({ children }) => {
 
     return (
         <adminMaterialsContext.Provider value={{
+            progress,
             uploadFile
         }}>
             {children}

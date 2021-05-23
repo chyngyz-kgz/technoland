@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import './Header.css';
 
 import headerVideo from '../../assets/videos/deaf.mp4';
@@ -10,11 +10,37 @@ import { authContext } from '../../contexts/AuthContext';
 
 const Header = () => {
     const history = useHistory();
-    const { isAuth } = useContext(authContext);
+    const { isAuth, loginUser, isUserLogedIn, logoutUser } = useContext(authContext);
     const [passwordInpType, setpasswordInpType] = useState("password");
 
-    function handleLoginBtn() {
-        history.push("/login");
+    useEffect(() => {
+        isUserLogedIn();
+    }, []);
+
+    const initialState = {
+        userData: {
+            email: '',
+            password: ''
+        },
+        errorMsg: '',
+        successMsg: ''
+    }
+
+    const [state, setState] = useState(initialState);
+
+    function changesHandler(event) {
+        setState({
+            ...state,
+            userData: {
+                ...state.userData,
+                [event.target.name]: event.target.value
+            }
+        });
+    }
+
+    function handleSubmitClick(event) {
+        event.preventDefault();
+        loginUser(state.userData, history)
     }
 
     function myFunction(event) {
@@ -63,18 +89,21 @@ const Header = () => {
                             <Link to="/partners">НАШИ ПАРТНЕРЫ</Link>
                         </li>
                     </ul>
-                    <Link className="navbar__log-in-out-btn" to="/login">
-                        {isAuth ? (
-                            <button className="sign-in-btn">
-                                <span>ВЫЙТИ</span>
-                            </button>
-                        ) : (
-                            <button className="sign-in-btn">
-                                <span>ВОЙТИ</span>
-                            </button>
-                        )}
-                    </Link>
-                    <a href="javascript:void(0);" className="icon" onClick={myFunction}>
+                    {
+                        isAuth ?
+                            <span onClick={() => logoutUser(history)} className="navbar__log-in-out-btn">
+                                <button className="sign-in-btn">
+                                    <span>ВЫЙТИ</span>
+                                </button>
+                            </span>
+                            :
+                            <Link className="navbar__log-in-out-btn" to="/login">
+                                <button className="sign-in-btn">
+                                    <span>ВОЙТИ</span>
+                                </button>
+                            </Link>
+                    }
+                    <a href="#" className="icon" onClick={myFunction}>
                         МЕНЮ
                     </a>
                 </div>
@@ -83,25 +112,30 @@ const Header = () => {
                         <p className="subcontent__title">Мы верим в мир, в котором каждый ребёнок имеет доступ к образованию.</p>
                         <p className="subcontent__description">В Кыргызстане детям с ограниченными возможностями здоровья нередко отказывают в предоставлении качественного инклюзивного образования, несмотря на то, что в 2019 году Кыргызстан ратифицировал Конвенцию о правах инвалидов.</p>
                     </div>
-                    <div className="subcontent__login-block">
-                        <form className="subcontent__login-form">
-                            <span className="subcontent__login-form__title">Материалы для скачивания</span>
-                            <span className="subcontent__login-form__description">Для доступа к учебным материалам требуется авторизация</span>
-                            <div className="subcontent__email-block">
-                                <label>Эл. почта</label>
-                                <input type="text" className="subcontent__login-inp" placeholder="Адрес эл. почты" />
+                    {
+                        !isAuth ?
+                            <div className="subcontent__login-block">
+                                <form onSubmit={handleSubmitClick} className="subcontent__login-form">
+                                    <span className="subcontent__login-form__title">Материалы для скачивания</span>
+                                    <span className="subcontent__login-form__description">Для доступа к учебным материалам требуется авторизация</span>
+                                    <div className="subcontent__email-block">
+                                        <label>Эл. почта</label>
+                                        <input onChange={changesHandler} name="email" type="text" className="subcontent__login-inp" placeholder="Адрес эл. почты" />
+                                    </div>
+                                    <div className="subcontent__password-block">
+                                        <label>Пароль</label>
+                                        <input onChange={changesHandler} name="password" type={passwordInpType} className="subcontent__password-inp" placeholder="Пароль" />
+                                    </div>
+                                    <div className="subcontent__checkbox-block">
+                                        <input type="checkbox" onClick={toggleInpType} />
+                                        <label>Показать пароль</label>
+                                    </div>
+                                    <button type="submit" className="subcontent__login-form__button">Войти</button>
+                                </form>
                             </div>
-                            <div className="subcontent__password-block">
-                                <label>Пароль</label>
-                                <input type={passwordInpType} className="subcontent__password-inp" placeholder="Пароль" />
-                            </div>
-                            <div className="subcontent__checkbox-block">
-                                <input type="checkbox" onClick={toggleInpType} />
-                                <label>Показать пароль</label>
-                            </div>
-                            <button className="subcontent__login-form__button">Войти</button>
-                        </form>
-                    </div>
+                            :
+                            ''
+                    }
                 </div>
             </div>
         </div>

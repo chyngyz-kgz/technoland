@@ -1,7 +1,70 @@
-.upload {
-  min-height: 40vh;
+.add-material__form {
+  margin-top: 5vh;
+  min-height: 30vh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  margin-top: 10vh;
+  background-color: #f4f7f8;
+  width: 100%;
+}
+
+.add-material__form__title {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background-color: orange;
+  width: 100%;
+  color: white;
+  text-align: center;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-material__form__label {
+  width: 60%;
+  text-align: left;
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #7c6f6f;
+}
+
+.add-material__form__input {
+  width: 60%;
+  height: 45px;
+  font-size: 16px;
+  outline: none;
+  cursor: pointer;
+  border: 1px #7c6f6f solid;
+  border-radius: 5px;
+  color: #7c6f6f;
+  background-color: white;
+}
+
+.add-material__form__attach {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 60%;
+}
+
+.add-material__form button {
+  margin: 10px;
+  width: 30%;
+  height: 50px;
+  font-size: 22px;
+  font-weight: 500;
+  background-color: orange;
+  color: white;
+  outline: none;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  transition: 300ms;
+}
+
+.add-material__form button:hover {
+  background-color: rgb(226, 159, 35);
+  color: white;
 }

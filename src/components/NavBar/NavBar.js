@@ -12,7 +12,7 @@ const NavBar = () => {
 
     const [searchValue, setSearchValue] = useState('');
     const { getNews } = useContext(newsContext);
-    const { isAuth } = useContext(authContext);
+    const { isAuth, logoutUser } = useContext(authContext);
     const history = useHistory();
 
     function handleSearchValueChange(event) {
@@ -31,10 +31,20 @@ const NavBar = () => {
                     <Link to="/" className="navbar__text-logo">ОФ ТЕХНОЛЭНД</Link>
                 </div>
                 <div className="navbar__actions">
-                    <input onChange={handleSearchValueChange} value={searchValue} className="navbar__search-inp" placeholder="Поиск новостей" />
+                    {
+                        window.location.pathname === '/news' || window.location.pathname === '/admin-panel-news' ?
+                            <input onChange={handleSearchValueChange} value={searchValue} className="navbar__search-inp" placeholder="Поиск новостей" />
+                            :
+                            ''
+                    }
                     <span className="navbar__link"><CallIcon />0772-322-652</span>
                     <span className="navbar__link"><WhatsAppIcon />WhatsApp</span>
-                    <Link to="/login" className="navbar__login-btn">{isAuth ? "Выйти" : "Войти"}</Link>
+                    {
+                        isAuth ?
+                            <span onClick={() => logoutUser(history)} className="navbar__login-btn">Выйти</span>
+                            :
+                            <Link to="/login" className="navbar__login-btn">Войти</Link>
+                    }
                 </div>
             </div>
         </div>

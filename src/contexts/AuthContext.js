@@ -51,7 +51,7 @@ const AuthContextProvider = ({ children }) => {
                     type: "GET_AUTH_INFO",
                     payload: true
                 });
-                history.push("/materials");
+                history.push("/");
             }
             console.log(data);
         } catch (err) {
@@ -60,7 +60,16 @@ const AuthContextProvider = ({ children }) => {
 
     }
 
-    async function isUserLogedIn(history) {
+    async function logoutUser(history) {
+        cookies.remove('techCookie');
+        dispatch({
+            type: "GET_AUTH_INFO",
+            payload: false
+        });
+        history.push('/');
+    }
+
+    async function isUserLogedIn(history = null) {
         const userToken = cookies.get('techCookie');
 
         if (userToken) {
@@ -77,11 +86,15 @@ const AuthContextProvider = ({ children }) => {
                     payload: true
                 });
             } else {
-                history.push("/login");
+                dispatch({
+                    type: "GET_AUTH_INFO",
+                    payload: false
+                });
+                if (history) history.push("/login");
             }
             console.log(data);
         } else {
-            history.push("/login");
+            if (history) history.push("/login");
         }
     }
 
@@ -90,6 +103,7 @@ const AuthContextProvider = ({ children }) => {
             isAuth: state.isAuth,
             registerUser,
             loginUser,
+            logoutUser,
             isUserLogedIn
         }}>
             {children}
