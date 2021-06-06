@@ -8,7 +8,8 @@
 
 .partners__title {
   color: #574339;
-  font-weight: 700;
+  font-weight: 500;
+  font-size: 24px;
 }
 
 .partner__section {
@@ -18,44 +19,50 @@
   display: flex;
 }
 
-.partner__info {
-  width: 50%;
+.partner__info-undp,
+.partner__info-unicef,
+.partner__info-sifo {
+  width: 100%;
   min-height: 40vh;
-  background-color: #1a64b7;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   padding: 5vh;
+}
+
+.partner__info-undp {
   color: white;
+  background-color: #1a64b7;
+}
+
+.partner__info-unicef {
+  color: #25baf1;
+  background-color: white;
+}
+
+.partner__info-sifo {
+  color: #046836;
+  background-color: white;
+}
+
+.partner__info__logo {
+  height: 10vh;
 }
 
 .partner__info__title {
   font-weight: 700;
   font-size: 25px;
+  width: 60%;
+  text-align: center;
+  margin-top: 4vh;
 }
 
 .partner__info__description {
   font-weight: 500;
-  font-size: 15px;
+  font-size: 17px;
   line-height: 1.5;
   text-indent: 1.5em; /* Отступ первой строки */
-  text-align: justify; /* Выравнивание по ширине */
-}
-
-.partner__logo__container {
-  width: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.partner__logo {
-  height: 100px;
-}
-
-.partner__logo__title {
-  font-weight: 700;
-  font-size: 25px;
-  color: #bb9e8d;
+  text-align: center;
+  margin-top: 2vh;
 }

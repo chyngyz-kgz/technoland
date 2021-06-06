@@ -5,7 +5,7 @@ import './LoginForm.css'
 
 const LoginForm = () => {
 
-    const { loginUser } = useContext(authContext);
+    const { loginUser, authMessage } = useContext(authContext);
     const history = useHistory();
 
     const initialState = {
@@ -50,6 +50,7 @@ const LoginForm = () => {
                 <input onChange={changesHandler} name="password" type={passwordInpType} placeholder="Пароль" />
                 <label><input type="checkbox" onClick={toggleInpType} />Показать пароль</label>
             </div>
+            <span className="login-form__error">{authMessage}</span>
             <button type="submit" className="login-form__btn">Войти</button>
         </form>
     );

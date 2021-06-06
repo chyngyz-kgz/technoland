@@ -1,12 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
 import './AdminPanelNews.css'
 import { Link, useHistory } from 'react-router-dom';
-import NavBar from '../NavBar/NavBar';
 import { newsContext } from '../../contexts/NewsContext';
 import { adminNewsContext } from '../../contexts/AdminNewsContext';
 
 import { CircularProgress, makeStyles } from '@material-ui/core';
 import Pagination from '@material-ui/lab/Pagination';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+import AdminPanelNavBar from '../AdminPanelNavBar/AdminPanelNavBar';
 
 const useStyles = makeStyles(theme => ({
 
@@ -29,7 +31,7 @@ const AdminPanelNews = () => {
     }, []);
 
     function handleDeleteBtn(id) {
-        if (window.confirm("Удалить нвость?")) {
+        if (window.confirm("Удалить новость?")) {
             deleteEvent(id);
         }
     }
@@ -49,8 +51,9 @@ const AdminPanelNews = () => {
 
     return (
         <>
-            <NavBar />
+            <AdminPanelNavBar />
             <div className="edit-news__container">
+                <span className="edit-news__container__title">НОВОСТИ</span>
                 <Link to="add-event"><span className="admin-panel__btn">ДОБАВИТЬ НОВОСТЬ</span></Link>
 
                 {
@@ -65,13 +68,13 @@ const AdminPanelNews = () => {
                                             <span className="news__block__item__title">{elem.title}</span>
                                             <span className="news__block__item__desc">{elem.description.slice(0, 150) + '...'}</span>
                                             <div className="news__block__item__btns">
-                                                <span className="news__block__item__edit-btn"><Link to={`/edit-news/${elem.news_id}`}>ИЗМЕНИТЬ</Link></span>
-                                                <span onClick={() => handleDeleteBtn(elem.news_id)} className="news__block__item__delete-btn">УДАЛИТЬ</span>
+                                                <Link to={`/edit-news/${elem.news_id}`}><EditIcon style={{ margin: 'auto 2vh', cursor: 'pointer', fontSize: '35px' }} /></Link>
+                                                <DeleteIcon style={{ margin: 'auto 1vh', color: 'red', cursor: 'pointer', fontSize: '35px' }} onClick={() => handleDeleteBtn(elem.news_id)} />
                                             </div>
                                         </div>
                                     ))
                                 }
-                                <Pagination className={classes.pagination} page={+page} onChange={handlePage} count={totalPages} color="#c4ab9d" />
+                                <Pagination className={classes.pagination} page={+page} onChange={handlePage} count={totalPages} />
                             </div>
                         )
                         :

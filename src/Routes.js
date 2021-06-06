@@ -26,6 +26,7 @@ import ELearning from './components/ELearning/ELearning';
 import SmartDevices from './components/SmartDevices/SmartDevices';
 import DigitalResources from './components/DigitalResources/DigitalResources';
 import MediaPrimer from './components/MediaPrimer/MediaPrimer';
+import EditUsers from './components/EditUsers/EditUsers';
 
 const Routes = () => {
     return (
@@ -55,6 +56,7 @@ const Routes = () => {
                                         <Route exact path="/edit-materials" component={EditMaterials} />
                                         <Route exact path="/add-event" component={AddEvent} />
                                         <Route exact path="/edit-news/:id" component={EditNews} />
+                                        <Route exact path="/edit-users" component={EditUsers} />
                                         <Route exact path="/favourite-news" component={FavouriteNews} />
                                         <Redirect to="/" />
                                     </Switch>

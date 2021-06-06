@@ -3,7 +3,8 @@ import './Partners.css';
 import NavBar from '../NavBar/NavBar';
 
 import undpLogo from '../../assets/images/undp.png';
-import unicefLogo from '../../assets/images/unicef.png'
+import unicefLogo from '../../assets/images/unicef.png';
+import sifoLogo from '../../assets/images/sifo-logo.gif';
 
 const Partners = () => {
     return (
@@ -11,34 +12,28 @@ const Partners = () => {
             <NavBar />
             <div className="partners__container">
                 <span className="partners__title">НАШИ ПАРТНЕРЫ</span>
-                <div className="partner__section">
-                    <div className="partner__info">
-                        <span className="partner__info__title">ПРОГРАММА РАЗВИТИЯ ОРГАНИЗАЦИИ ОБЪЕДИНЕННЫХ НАЦИЙ</span>
-                        <span className="partner__info__description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </span>
-                    </div>
-                    <div className="partner__logo__container">
-                        <img className="partner__logo" src={undpLogo} alt="UNDP" />
-                    </div>
-                </div>
 
                 <div className="partner__section">
-                    <div className="partner__logo__container">
-                        <img className="partner__logo" src={unicefLogo} alt="UNDP" />
-                    </div>
-                    <div className="partner__info">
+                    <div className="partner__info-unicef">
+                        <img className="partner__info__logo" src={unicefLogo} alt="" />
                         <span className="partner__info__title">ЮНИСЕФ</span>
-                        <span className="partner__info__description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </span>
+                        <span className="partner__info__description">С началом этого года для преодоления последствий пандемии ЮНИСЕФ и ПРООН в Кыргызской Республике оказали поддержку для разработки и запуску двуязычного мобильного приложения «Дилгир» для глухих и слабослышащих детей. Приложение является дополнением к учебнику “Дилгир-1”, над созданием которого работает методический совет Специальной общеобразовательной школы-интернат для глухих детей, совместно с общественным фондом «Технолэнд». Учебник представлен одновременно на русском и кыргызском языках, позволяющий внедрить единую методику обучения на обоих языках.</span>
                     </div>
                 </div>
 
                 <div className="partner__section">
-                    <div className="partner__info">
-                        <span className="partner__info__title">SIFO</span>
-                        <span className="partner__info__description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </span>
+                    <div className="partner__info-undp">
+                        <img className="partner__info__logo" src={undpLogo} alt="" />
+                        <span className="partner__info__title">ПРОГРАММА РАЗВИТИЯ ОРГАНИЗАЦИИ ОБЪЕДИНЕННЫХ НАЦИЙ</span>
+                        <span className="partner__info__description">С началом этого года для преодоления последствий пандемии ЮНИСЕФ и ПРООН в Кыргызской Республике оказали поддержку для разработки и запуску двуязычного мобильного приложения «Дилгир» для глухих и слабослышащих детей. Приложение является дополнением к учебнику “Дилгир-1”, над созданием которого работает методический совет Специальной общеобразовательной школы-интернат для глухих детей, совместно с общественным фондом «Технолэнд».            Учебник представлен одновременно на русском и кыргызском языках, позволяющий внедрить единую методику обучения на обоих языках.</span>
                     </div>
-                    <div className="partner__logo__container">
-                        <span className
-                            ="partner__logo__title">Seoul Interntional <br /> Friendship Organization</span>
+                </div>
+
+                <div className="partner__section">
+                    <div className="partner__info-sifo">
+                        <img className="partner__info__logo" src={sifoLogo} alt="" />
+                        <span className="partner__info__title">SEOUL INTERNATIONAL FRIENDSHIP ORGANIZATION</span>
+                        <span className="partner__info__description">С началом этого года для преодоления последствий пандемии ЮНИСЕФ и ПРООН в Кыргызской Республике оказали поддержку для разработки и запуску двуязычного мобильного приложения «Дилгир» для глухих и слабослышащих детей. Приложение является дополнением к учебнику “Дилгир-1”, над созданием которого работает методический совет Специальной общеобразовательной школы-интернат для глухих детей, совместно с общественным фондом «Технолэнд». Учебник представлен одновременно на русском и кыргызском языках, позволяющий внедрить единую методику обучения на обоих языках.</span>
                     </div>
                 </div>
             </div>

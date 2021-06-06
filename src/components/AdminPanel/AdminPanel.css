@@ -9,7 +9,8 @@
 .admin-panel__title {
   margin: 5vh;
   color: #574339;
-  font-weight: 700;
+  font-weight: 500;
+  font-size: 24px;
 }
 
 .btns-container {

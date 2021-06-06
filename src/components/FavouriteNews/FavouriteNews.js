@@ -22,12 +22,12 @@ const FavouriteNews = () => {
             <div className="news__container">
                 <span className="news__title">ИЗБРАННЫЕ НОВОСТИ</span>
                 {
-                    favourites ?
+                    favourites?.length ?
                         (
                             <>
                                 {
                                     favourites.map(elem => (
-                                        <NewsCard key={elem.news_id} image={elem.image} id={elem.news_id} title={elem.title} description={elem.description.slice(0, 300) + '...'} />
+                                        <NewsCard key={elem.news_id} image={elem.image} id={elem.news_id} title={elem.title} description={elem.description.slice(0, 300) + '...'} date={elem.date} />
                                     ))
                                 }
                             </>
@@ -35,7 +35,7 @@ const FavouriteNews = () => {
                         :
                         (
                             <div className="progress__container">
-                                <CircularProgress />
+                                <span className="news__title">Избранные новости отсутвуют</span>
                             </div>
                         )
                 }

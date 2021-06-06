@@ -1,28 +1,17 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import './NewsDetails.css'
 import { CircularProgress, TextField } from '@material-ui/core';
-import { Divider, Avatar, Grid, Paper } from "@material-ui/core";
+import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import { newsContext } from '../../contexts/NewsContext';
 import NavBar from '../NavBar/NavBar';
 
 const NewsDetails = (props) => {
 
-    const { getNewsDetails, newsDetails, addComment, newsComments } = useContext(newsContext);
-    const [inputValue, setInputValue] = useState('');
+    const { getNewsDetails, newsDetails } = useContext(newsContext);
 
     useEffect(() => {
         getNewsDetails(props.match.params.id);
     }, []);
-
-    function handleInpChange(event) {
-        setInputValue(event.target.value);
-
-    }
-
-    function handleAddCommentBtn(news_id, inputValue) {
-        addComment(news_id, inputValue);
-        setInputValue('');
-    }
 
     return (
         <>
@@ -32,39 +21,12 @@ const NewsDetails = (props) => {
                     newsDetails ? (
                         <>
                             <span className="news-details__title">{newsDetails.title}</span>
-                            <span className="news-details__description">{newsDetails.description}</span>
+                            <span className="news-details__date"><AccessTimeIcon style={{ fontSize: 30, color: 'orange', marginRight: '2px' }} /> {newsDetails.date}</span>
+                            <pre className="news-details__description">{newsDetails.description}</pre>
                             <img className="news-details__image" src={newsDetails.image} alt={newsDetails.title} />
                             <span className="news-details__title">{newsDetails.subTitle}</span>
-                            <span className="news-details__description">{newsDetails.additionalDescription}</span>
+                            <pre className="news-details__description">{newsDetails.additionalDescription}</pre>
                             <img className="news-details__image" src={newsDetails.additionalImage} alt={newsDetails.title} />
-                            <div className="news-details__comments-block">
-                                <div style={{ padding: 14 }} className="App">
-                                    <h1>Комментарии:</h1>
-                                    {
-                                        newsComments ? newsComments.map(elem => (
-                                            <Paper style={{ padding: "40px 20px" }}>
-                                                <Grid container wrap="nowrap" spacing={2}>
-                                                    <Grid item>
-                                                        <Avatar alt="Remy Sharp" />
-                                                    </Grid>
-                                                    <Grid justifyContent="left" item xs zeroMinWidth>
-                                                        <h4 style={{ margin: 0, textAlign: "left" }}>Some User</h4>
-                                                        <p style={{ textAlign: "left" }}>
-                                                            {elem}
-                                                        </p>
-                                                    </Grid>
-                                                </Grid>
-                                            </Paper>
-                                        ))
-                                            :
-                                            ''
-                                    }
-                                    <div className="comments-actions">
-                                        <TextField onChange={handleInpChange} value={inputValue} id="standard-basic" label="Оставить комментарий" />
-                                        <span onClick={() => handleAddCommentBtn(newsDetails.news_id, inputValue)} style={{ width: "20vw", textAlign: "center" }} className="admin-panel__btn">Отправить</span>
-                                    </div>
-                                </div>
-                            </div>
                         </>
                     )
                         :

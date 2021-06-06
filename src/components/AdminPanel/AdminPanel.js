@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
-import './AdminPanel.css'
-import NavBar from '../NavBar/NavBar';
+import './AdminPanel.css';
 import { adminAuthContext } from '../../contexts/AdminAuthContext';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import AdminPanelNavBar from '../AdminPanelNavBar/AdminPanelNavBar';
 
 const AdminPanel = () => {
 
-    const { isAdminLogedIn, loginAdmin, admin } = useContext(adminAuthContext);
+    const { isAdminLogedIn, loginAdmin, admin, adminAuthMessage } = useContext(adminAuthContext);
+    const history = useHistory();
 
     const initialState = {
         adminData: {
@@ -17,6 +18,7 @@ const AdminPanel = () => {
         successMsg: ''
     }
     const [state, setState] = useState(initialState);
+    const [passwordInpType, setpasswordInpType] = useState("password");
 
 
     useEffect(() => {
@@ -35,37 +37,39 @@ const AdminPanel = () => {
 
     function handleSubmitClick(event) {
         event.preventDefault();
-        loginAdmin(state.adminData);
+        loginAdmin(state.adminData, history);
+    }
+
+    function toggleInpType() {
+        passwordInpType === "password" ? setpasswordInpType("text") : setpasswordInpType("password");
     }
 
     return admin ?
         (
             <>
-                <NavBar />
+                <AdminPanelNavBar />
                 <div className="admin-panel__container">
-                    <span className="admin-panel__title">Здравствуйте, {admin.name}</span>
-                    <div className="btns-container">
-                        <Link to="admin-panel-news"><span className="admin-panel__btn">НОВОСТИ</span></Link>
-                        <Link to="edit-materials"><span className="admin-panel__btn">МАТЕРИАЛЫ ДЛЯ СКАЧИВАНИЯ</span></Link>
-                    </div>
+                    <span className="admin-panel__title">Здравствуйте, {admin.name}!</span>
                 </div>
             </>
         )
         :
         (
             <>
-                <NavBar />
+                <AdminPanelNavBar />
                 <div className="admin-panel__container">
                     <span className="admin-panel__title">ТРЕБУЕТСЯ АВТОРИЗАЦИЯ</span>
                     <form onSubmit={handleSubmitClick} className="login-form">
                         <div className="email__block">
-                            <label>email *</label>
+                            <label>EMAIL *</label>
                             <input onChange={changesHandler} name="email" type="text" placeholder="Адрес эл. почты" />
                         </div>
                         <div className="password__block">
                             <label>ПАРОЛЬ *</label>
-                            <input onChange={changesHandler} name="password" type="password" placeholder="Пароль" />
+                            <input onChange={changesHandler} name="password" type={passwordInpType} placeholder="Пароль" />
+                            <label><input type="checkbox" onClick={toggleInpType} />Показать пароль</label>
                         </div>
+                        <span className="login-form__error">{adminAuthMessage}</span>
                         <button type="submit" className="login-form__btn">Войти</button>
                     </form>
                 </div>

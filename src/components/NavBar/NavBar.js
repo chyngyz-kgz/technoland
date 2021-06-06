@@ -37,8 +37,8 @@ const NavBar = () => {
                             :
                             ''
                     }
-                    <span className="navbar__link"><CallIcon />0772-322-652</span>
-                    <span className="navbar__link"><WhatsAppIcon />WhatsApp</span>
+                    <a href="tel:+996-772-322-652"><span className="navbar__link"><CallIcon />0772-322-652</span></a>
+                    <a href="https://wa.me/+996722322652?text=Здравствуйте, пишу с сайта Technoland-pf.kg!"><span className="navbar__link"><WhatsAppIcon />WhatsApp</span></a>
                     {
                         isAuth ?
                             <span onClick={() => logoutUser(history)} className="navbar__login-btn">Выйти</span>

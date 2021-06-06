@@ -6,7 +6,8 @@ import Cookies from 'universal-cookie';
 export const adminAuthContext = React.createContext();
 
 const ADMIN_INIT_STATE = {
-    admin: null
+    admin: null,
+    adminAuthMessage: ''
 }
 
 const reducer = (state = ADMIN_INIT_STATE, action) => {
@@ -15,6 +16,11 @@ const reducer = (state = ADMIN_INIT_STATE, action) => {
             return {
                 ...state,
                 admin: action.payload
+            }
+        case "GET_ADMIN_AUTH_MESSAGE":
+            return {
+                ...state,
+                adminAuthMessage: action.payload
             }
         default:
             return state
@@ -25,7 +31,7 @@ const AdminAuthContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, ADMIN_INIT_STATE);
     const cookies = new Cookies();
 
-    async function loginAdmin(adminData) {
+    async function loginAdmin(adminData, history) {
         try {
             const { data } = await axios.post(`${ADMIN_AUTH_API}`, adminData);
             if (data.success && data.token) {
@@ -34,11 +40,25 @@ const AdminAuthContextProvider = ({ children }) => {
                     type: "GET_ADMIN_INFO",
                     payload: data.user
                 });
+                history.push('/admin-panel-news')
             }
+            dispatch({
+                type: "GET_ADMIN_AUTH_MESSAGE",
+                payload: data.message
+            });
             console.log(data);
         } catch (err) {
             console.log(err);
         }
+        isAdminLogedIn();
+    }
+
+    async function logoutAdmin() {
+        cookies.remove('techAdminCookie');
+        dispatch({
+            type: "GET_ADMIN_INFO",
+            payload: null
+        });
     }
 
     async function isAdminLogedIn() {
@@ -65,7 +85,9 @@ const AdminAuthContextProvider = ({ children }) => {
     return (
         <adminAuthContext.Provider value={{
             admin: state.admin,
+            adminAuthMessage: state.adminAuthMessage,
             loginAdmin,
+            logoutAdmin,
             isAdminLogedIn
         }}>
             {children}

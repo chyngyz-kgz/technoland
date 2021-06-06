@@ -8,14 +8,16 @@
 }
 .contacts-us__title {
   color: #574339;
-  font-weight: 700;
+  font-weight: 500;
+  font-size: 24px;
 }
 
 .contact__title {
   color: #574339;
-  font-weight: 700;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 1.5;
   margin-top: 5vh;
-  margin-bottom: 2vh;
 }
 
 .contact__info {
@@ -79,6 +81,7 @@
   border-radius: 5px;
   color: #7c6f6f;
   background-color: white;
+  padding-left: 5px;
 }
 
 .form__textarea__container {
@@ -100,6 +103,13 @@
   border-radius: 5px;
   color: #7c6f6f;
   background-color: white;
+  padding-left: 5px;
+}
+
+.contact-form__error {
+  color: red;
+  width: 100%;
+  text-align: center;
 }
 
 .form__submit-btn {

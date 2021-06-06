@@ -9,7 +9,7 @@
 }
 
 .download__item {
-  height: 20vh;
+  height: 30vh;
   width: 30%;
   border-radius: 5px;
   border: 1px #7c6f6f solid;
@@ -21,14 +21,26 @@
 }
 
 .download__item__title {
-  margin-top: 10px;
-  font-size: 20px;
+  margin: 10px 5px 5px 5px;
+  font-size: 18px;
   text-align: center;
 }
 
+.download__item__image {
+  height: 30%;
+}
+
+.download__item__name {
+  margin: 10px 5px 5px 5px;
+  font-size: 16px;
+  text-align: center;
+  color: #bb9e8d;
+}
+
 .download__item__description {
+  margin: 10px 5px 5px 5px;
   margin-top: 10px;
-  font-size: 18px;
+  font-size: 16px;
   text-align: center;
 }
 

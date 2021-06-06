@@ -19,7 +19,7 @@
 
 .stycky-navbar__text-logo {
   color: black;
-  font-size: 15px;
+  font-size: 17px;
   font-weight: normal;
 }
 
@@ -30,7 +30,7 @@
 }
 
 .stycky-navbar__link {
-  color: black;
+  color: #bb9e8d;
   display: flex;
   align-items: center;
   cursor: pointer;

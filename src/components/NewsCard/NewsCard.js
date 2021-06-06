@@ -8,6 +8,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import BookmarkIcon from '@material-ui/icons/Bookmark';
+import ScheduleIcon from '@material-ui/icons/Schedule';
 import { Link } from 'react-router-dom';
 import { newsContext } from '../../contexts/NewsContext';
 
@@ -45,16 +46,28 @@ export default function NewsCard(props) {
                     </Typography>
                 </CardContent>
             </CardActionArea>
-            <CardActions>
-                <Link to={`/news-details/${props.id}`}>
-                    <Button size="small" style={{ color: "orange" }}>
-                        Читать подробнее
+
+            <CardActions style={{ justifyContent: 'space-between' }}>
+                <div>
+                    <Link to={`/news-details/${props.id}`}>
+                        <Button size="small" style={{ color: "orange" }}>
+                            Читать подробнее
                     </Button>
-                </Link>
-                <Button onClick={() => addToFavourites({ news_id: props.id, title: props.title, image: props.image, description: props.description })} size="small" style={{ color: "orange" }}>
-                    <BookmarkIcon style={{ color: checkNewsInFavourites(props.id) ? "green" : "orange" }} />
-                </Button>
+                    </Link>
+                    <Button onClick={() => addToFavourites({ news_id: props.id, title: props.title, image: props.image, description: props.description, date: props.date })} size="small" style={{ color: "orange" }}>
+                        <BookmarkIcon style={{ color: checkNewsInFavourites(props.id) ? "green" : "orange" }} />
+                    </Button>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <ScheduleIcon style={{ color: 'orange', marginRight: '5px' }} />
+                    <Typography color="textSecondary" component="span">
+                        {
+                            props.date
+                        }
+                    </Typography>
+                </div>
             </CardActions>
+
         </Card>
     );
 }

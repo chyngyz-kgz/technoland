@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useReducer } from 'react';
-import { GET_NEWS_API, GET_NEWS_DETAILS_API, ADD_COMMENT_API } from '../helpers/constants';
+import { GET_NEWS_API, GET_NEWS_DETAILS_API } from '../helpers/constants';
 
 export const newsContext = React.createContext();
 
@@ -29,11 +29,6 @@ const reducer = (state = INIT_STATE, action) => {
                 ...state,
                 favourites: action.payload
             }
-        case "GET_NEWS_COMMENTS":
-            return {
-                ...state,
-                newsComments: action.payload
-            }
         default:
             return state
     }
@@ -56,10 +51,6 @@ const NewsContextProvider = ({ children }) => {
         dispatch({
             type: "GET_NEWS_DETAILS",
             payload: data.news[0]
-        });
-        dispatch({
-            type: "GET_NEWS_COMMENTS",
-            payload: JSON.parse(data.news[0].comments)
         });
     }
 
@@ -104,23 +95,6 @@ const NewsContextProvider = ({ children }) => {
         });
     };
 
-    async function addComment(id, comment) {
-        try {
-            const { data } = await axios.get(`${GET_NEWS_DETAILS_API}?id=${id}`);
-            let oldComments = JSON.parse(data.news[0].comments)
-            if (!oldComments) {
-                oldComments = [];
-            }
-            oldComments.push(comment);
-
-            const { response } = await axios.post(ADD_COMMENT_API, { news_id: id, comments: JSON.stringify(oldComments) });
-        } catch (err) {
-            console.log(err);
-        }
-
-        getNewsDetails(id);
-    }
-
     const [state, dispatch] = useReducer(reducer, INIT_STATE);
     return (
         <newsContext.Provider value={{
@@ -128,13 +102,11 @@ const NewsContextProvider = ({ children }) => {
             newsDetails: state.newsDetails,
             totalPages: state.totalPages,
             favourites: state.favourites,
-            newsComments: state.newsComments,
             getNews,
             getNewsDetails,
             addToFavourites,
             checkNewsInFavourites,
-            getFavourites,
-            addComment
+            getFavourites
         }}>
             {children}
         </newsContext.Provider>

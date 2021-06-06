@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { adminNewsContext } from '../../contexts/AdminNewsContext';
 import { newsContext } from '../../contexts/NewsContext';
-import NavBar from '../NavBar/NavBar';
+import AdminPanelNavBar from '../AdminPanelNavBar/AdminPanelNavBar';
 
 const EditNews = (props) => {
 
@@ -36,7 +36,7 @@ const EditNews = (props) => {
 
     return (
         <>
-            <NavBar />
+            <AdminPanelNavBar />
             <div className="admin-panel__container">
                 <span className="admin-panel__title">ДОБАВЛЕНИЕ НОВОСТИ</span>
                 {

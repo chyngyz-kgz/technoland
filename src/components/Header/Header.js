@@ -1,16 +1,17 @@
 import React, { useContext, useState, useEffect } from 'react';
 import './Header.css';
-
 import headerVideo from '../../assets/videos/deaf.mp4';
 import headerLogo from '../../assets/images/technoland-logo.png';
 import { useHistory } from 'react-router';
 import Video from 'react-responsive-video';
+import DilgirimLogo from '../../assets/images/dilgirim-logo.png';
 import { Link } from 'react-router-dom';
 import { authContext } from '../../contexts/AuthContext';
+import SideBar from '../SideBar/SideBar';
 
 const Header = () => {
     const history = useHistory();
-    const { isAuth, loginUser, isUserLogedIn, logoutUser } = useContext(authContext);
+    const { isAuth, loginUser, isUserLogedIn, logoutUser, authMessage } = useContext(authContext);
     const [passwordInpType, setpasswordInpType] = useState("password");
 
     useEffect(() => {
@@ -59,6 +60,7 @@ const Header = () => {
 
     return (
         <div className="header">
+            <SideBar pageWrapId={"page-wrap"} outerContainerId={"App"} />
 
             <Video
                 className="video"
@@ -103,14 +105,11 @@ const Header = () => {
                                 </button>
                             </Link>
                     }
-                    <a href="#" className="icon" onClick={myFunction}>
-                        МЕНЮ
-                    </a>
                 </div>
                 <div className="subcontent">
                     <div className="subcontent__text-block">
                         <p className="subcontent__title">Мы верим в мир, в котором каждый ребёнок имеет доступ к образованию.</p>
-                        <p className="subcontent__description">В Кыргызстане детям с ограниченными возможностями здоровья нередко отказывают в предоставлении качественного инклюзивного образования, несмотря на то, что в 2019 году Кыргызстан ратифицировал Конвенцию о правах инвалидов.</p>
+                        <p className="subcontent__description">В Кыргызстане детям с ограниченными возможностями здоровья нередко отказывают в предоставлении качественного инклюзивного образования вопреки тому, что в 2019 году Кыргызстан ратифицировал Конвенцию о правах инвалидов.</p>
                     </div>
                     {
                         !isAuth ?
@@ -130,11 +129,15 @@ const Header = () => {
                                         <input type="checkbox" onClick={toggleInpType} />
                                         <label>Показать пароль</label>
                                     </div>
+                                    <span className="subcontent__login-form__error">{authMessage}</span>
                                     <button type="submit" className="subcontent__login-form__button">Войти</button>
                                 </form>
                             </div>
                             :
-                            ''
+                            <div className="subcontent__promo-block">
+                                {/* <img src={DilgirimLogo} alt="Дилгирим" /> */}
+
+                            </div>
                     }
                 </div>
             </div>

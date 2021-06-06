@@ -9,6 +9,7 @@ import privet1 from '../../assets/images/privet-1.gif';
 import web_PD from '../../assets/images/web_PD.gif';
 import girl1 from '../../assets/images/girl1.gif';
 import girl2 from '../../assets/images/girl2.gif';
+import videoo from '../../assets/videos/deaf.mp4';
 
 const DigitalResources = () => {
     return (

@@ -24,8 +24,22 @@ const AdminNewsContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, INIT_STATE);
 
     async function postEvent(newEvent, history) {
+
+        let today = new Date();
+        let dd = String(today.getDate()).padStart(2, '0');
+        let mm = String(today.getMonth() + 1).padStart(2, '0');
+        let yyyy = today.getFullYear();
+        today = dd + '/' + mm + '/' + yyyy;
+        newEvent.date = today;
+
+        let formData = new FormData();
+        formData.append(
+            'data',
+            JSON.stringify(newEvent)
+        );
+
         try {
-            const { data } = await axios.post(ADD_EVENT_API, newEvent);
+            const { data } = await axios.post(ADD_EVENT_API, formData);
             console.log(data);
 
             history.push("/admin-panel-news");

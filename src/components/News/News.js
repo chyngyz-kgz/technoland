@@ -11,6 +11,7 @@ import { useHistory } from 'react-router';
 const useStyles = makeStyles(theme => ({
 
     pagination: {
+        color: "#c4ab9d",
         // margin: 'auto',
         // padding: 'auto'
     }
@@ -51,10 +52,10 @@ const News = () => {
                             <>
                                 {
                                     news.news.map(elem => (
-                                        <NewsCard key={elem.news_id} image={elem.image} id={elem.news_id} title={elem.title} description={elem.description.slice(0, 300) + '...'} />
+                                        <NewsCard key={elem.news_id} image={elem.image} id={elem.news_id} title={elem.title} description={elem.description.slice(0, 300) + '...'} date={elem.date} />
                                     ))
                                 }
-                                <Pagination className={classes.pagination} page={+page} onChange={handlePage} count={totalPages} color="#c4ab9d" />
+                                <Pagination className={classes.pagination} page={+page} onChange={handlePage} count={totalPages} />
                             </>
                         )
                         :

@@ -1,12 +1,13 @@
 import axios from 'axios';
 import React, { useReducer } from 'react';
-import { AUTH_API, CHECK_AUTH_API, Axios } from '../helpers/constants';
+import { AUTH_API, CHECK_AUTH_API } from '../helpers/constants';
 import Cookies from 'universal-cookie';
 
 export const authContext = React.createContext();
 
 const INIT_STATE = {
     isAuth: false,
+    authMessage: ''
 }
 
 const reducer = (state = INIT_STATE, action) => {
@@ -15,6 +16,11 @@ const reducer = (state = INIT_STATE, action) => {
             return {
                 ...state,
                 isAuth: action.payload
+            }
+        case "GET_AUTH_MESSAGE":
+            return {
+                ...state,
+                authMessage: action.payload
             }
         default:
             return state
@@ -52,7 +58,13 @@ const AuthContextProvider = ({ children }) => {
                     payload: true
                 });
                 history.push("/");
+            } else {
+                dispatch({
+                    type: "GET_AUTH_MESSAGE",
+                    payload: data.message
+                });
             }
+
             console.log(data);
         } catch (err) {
             console.log(err);
@@ -101,6 +113,7 @@ const AuthContextProvider = ({ children }) => {
     return (
         <authContext.Provider value={{
             isAuth: state.isAuth,
+            authMessage: state.authMessage,
             registerUser,
             loginUser,
             logoutUser,

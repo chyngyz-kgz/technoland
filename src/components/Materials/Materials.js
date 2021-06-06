@@ -5,18 +5,52 @@ import './Materials.css';
 import NavBar from '../NavBar/NavBar';
 import { materialsContext } from '../../contexts/MateriasContext';
 import GetAppIcon from '@material-ui/icons/GetApp';
-import DownloadLink from "react-download-link";
+import FileSaver from 'file-saver';
+import Pagination from '@material-ui/lab/Pagination';
+import { makeStyles } from '@material-ui/core';
+import { useState } from 'react';
+
+const useStyles = makeStyles(theme => ({
+
+    pagination: {
+        color: "#c4ab9d",
+        // margin: 'auto',
+        // padding: 'auto'
+    }
+}));
 
 const Materials = () => {
 
     const { isUserLogedIn } = useContext(authContext);
     const { getMaterials, materials, totalPages } = useContext(materialsContext);
     const history = useHistory();
+    const [page, setPage] = useState(getPage());
+    const classes = useStyles();
 
     useEffect(() => {
         isUserLogedIn(history);
         getMaterials();
     }, []);
+
+    function getPage() {
+        const search = new URLSearchParams(history.location.search);
+        return search.get("page") ? search.get("page") : 1;
+    }
+
+    function handlePage(event, page) {
+        const search = new URLSearchParams(history.location.search);
+        search.set("page", page);
+        history.push(`${history.location.pathname}?${search.toString()}`);
+        getMaterials();
+        setPage(page);
+    }
+
+    const saveFile = (url, fileName) => {
+        FileSaver.saveAs(
+            url,
+            fileName
+        );
+    };
 
     return (
         <>
@@ -30,27 +64,23 @@ const Materials = () => {
                                 materials.materials.map(elem => (
                                     <div key={elem.material_pathname} className="download__item">
                                         <span className="download__item__title">{elem.material_title}</span>
+                                        <img className="download__item__image" src={elem.material_image} alt="" />
+                                        <span className="download__item__name">{elem.material_name}</span>
                                         <span className="download__item__description">{elem.material_description}</span>
-                                        <a href={elem.material_pathname} target="_blank" rel="noopener noreferrer" download>
-                                            <button><DownloadLink
-                                                style={{
-                                                    textDecoration: "none",
-                                                    height: "100%",
-                                                    width: "100%",
-                                                    color: "white"
-                                                }}
-                                                label="Скачать"
-                                                filename={elem.material_name}
-                                                exportFile={() => "Client side cache data here…"}
-                                            /> <GetAppIcon /></button>
-                                        </a>
+                                        <button onClick={() => saveFile(elem.material_pathname, elem.material_title)}>Скачать <GetAppIcon /></button>
                                     </div>
                                 ))
                             )
                             :
-                            'Материалы отсутсвуют'
+                            'Материалы отсутствуют'
                     }
                 </div>
+                {
+                    materials ?
+                        <Pagination className={classes.pagination} page={+page} onChange={handlePage} count={totalPages} />
+                        :
+                        ''
+                }
             </div>
         </>
     );

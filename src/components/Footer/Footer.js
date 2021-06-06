@@ -18,13 +18,14 @@ const Footer = () => {
                         <Link to="/about" className="footer__menu__link">О нас</Link>
                         <Link to="/partners" className="footer__menu__link">Наши партнеры</Link>
                         <Link to="/materials" className="footer__menu__link">Материалы <br />для скачивания</Link>
+                        <Link to="/admin_panel" className="footer__menu__link">Админ-панель</Link>
                     </div>
                     <div className="footer__menu__block">
                         <span className="footer__menu__title">КАК СВЯЗАТЬСЯ?</span>
                         <Link to="/contacts" className="footer__menu__link">Контакты</Link>
                         <Link to="/contacts" className="footer__menu__link">Обратная связь</Link>
-                        <span className="footer__menu__link"><WhatsAppIcon />WhatsApp</span>
-                        <span className="footer__menu__link"><CallIcon />0772-322-652</span>
+                        <a href="https://wa.me/+996722322652?text=Здравствуйте, пишу с сайта Technoland-pf.kg!"><span className="footer__menu__link"><WhatsAppIcon />WhatsApp</span></a>
+                        <a href="tel:+996-772-322-652"><span className="footer__menu__link"><CallIcon />0772-322-652</span></a>
                     </div>
                     <div className="footer__menu__block">
                         <span className="footer__menu__title">НОВОСТИ</span>
@@ -33,9 +34,9 @@ const Footer = () => {
                     </div>
                     <div className="footer__menu__block">
                         <span className="footer__menu__title">МЫ В СОЦСЕТЯХ</span>
-                        <span className="footer__menu__link"><FacebookIcon /> facebook</span>
-                        <span className="footer__menu__link"><InstagramIcon /> instagram</span>
-                        <span className="footer__menu__link"><YouTubeIcon /> youtube</span>
+                        <a target="_blank" href="https://www.facebook.com/technoland.telematics/"><span className="footer__menu__link"><FacebookIcon /> facebook</span></a>
+                        <a target="_blank" href="https://www.instagram.com/of_technoland/"><span className="footer__menu__link"><InstagramIcon /> instagram</span></a>
+                        <a target="_blank"><span className="footer__menu__link"><YouTubeIcon /> youtube</span></a>
                     </div>
                 </div>
                 <div className="footer__horizontal-line"></div>

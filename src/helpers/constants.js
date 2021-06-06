@@ -1,5 +1,5 @@
-export const AUTH_API = 'http://localhost/technoland/login.php';
-export const CHECK_AUTH_API = 'http://localhost/technoland/user-info.php';
+export const AUTH_API = 'http://technoland/login.php';
+export const CHECK_AUTH_API = 'http://technoland/user-info.php';
 export const ADMIN_AUTH_API = 'http://technoland/admin/login-admin.php';
 export const CHECK_ADMIN_AUTH_API = 'http://technoland/admin/admin-info.php';
 export const ADD_EVENT_API = 'http://technoland/admin/add-event.php';
@@ -7,6 +7,6 @@ export const GET_NEWS_API = 'http://technoland/get-news.php';
 export const GET_NEWS_DETAILS_API = 'http://technoland/get-news-details.php';
 export const UPDATE_EVENT_API = 'http://technoland/admin/edit-news.php';
 export const DELETE_EVENT_API = 'http://technoland/admin/delete-news.php';
-export const ADD_COMMENT_API = 'http://technoland/add-comment.php';
 export const ADD_MATERIAL_API = 'http://technoland/admin/upload-file.php';
 export const GET_MATERIALS_API = 'http://technoland/get-materials.php';
+export const SEND_MAIL_API = 'http://technoland/send-mail.php';

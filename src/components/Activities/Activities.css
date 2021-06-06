@@ -2,6 +2,8 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  background-color: #f7f7f7;
+  padding-bottom: 4vh;
 }
 .activities__container {
   width: 70%;

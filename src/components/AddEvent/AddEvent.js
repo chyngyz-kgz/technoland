@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react';
-import './AddEvent.css'
-import NavBar from '../NavBar/NavBar';
+import './AddEvent.css';
 import { adminNewsContext } from '../../contexts/AdminNewsContext';
 import { useHistory } from 'react-router';
+import AdminPanelNavBar from '../AdminPanelNavBar/AdminPanelNavBar';
 
 const AddEvent = () => {
     const { postEvent } = useContext(adminNewsContext);
@@ -34,7 +34,7 @@ const AddEvent = () => {
 
     return (
         <>
-            <NavBar />
+            <AdminPanelNavBar />
             <div className="admin-panel__container">
                 <span className="admin-panel__title">ДОБАВЛЕНИЕ НОВОСТИ</span>
                 <form onSubmit={handleSubmit} className="add-event__form">

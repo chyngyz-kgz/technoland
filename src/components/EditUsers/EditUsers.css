@@ -1,4 +1,4 @@
-.add-material__form {
+.add-user__form {
   margin-top: 5vh;
   min-height: 30vh;
   display: flex;
@@ -9,7 +9,7 @@
   width: 100%;
 }
 
-.add-material__form__title {
+.add-user__form__title {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   background-color: orange;
@@ -22,7 +22,7 @@
   justify-content: center;
 }
 
-.add-material__form__label {
+.add-user__form__label {
   width: 60%;
   text-align: left;
   margin-top: 10px;
@@ -31,7 +31,7 @@
   color: #7c6f6f;
 }
 
-.add-material__form__input {
+.add-user__form__input {
   width: 60%;
   height: 45px;
   font-size: 16px;
@@ -43,14 +43,14 @@
   background-color: white;
 }
 
-.add-material__form__browse-file__block {
+.add-user__form__browse-file__block {
   width: 60%;
   height: 45px;
   font-size: 16px;
   margin-top: 2vh;
 }
 
-.add-material__form__attach {
+.add-user__form__attach {
   border: 1px #7c6f6f solid;
   border-radius: 5px;
   display: inline-block;
@@ -61,24 +61,24 @@
   color: #7c6f6f;
 }
 
-.add-material__form__file-name {
+.add-user__form__file-name {
   font-size: 16px;
   font-weight: 700;
   color: #7c6f6f;
   margin-left: 2vh;
 }
 
-.add-material__form__attach-inp {
+.add-user__form__attach-inp {
   display: none;
 }
 
-.add-material__form__error {
+.add-user__form__error {
   width: 60%;
   color: red;
   text-align: center;
 }
 
-.add-material__form button {
+.add-user__form button {
   margin: 10px;
   width: 30%;
   height: 50px;
@@ -93,7 +93,7 @@
   transition: 300ms;
 }
 
-.add-material__form button:hover {
+.add-user__form button:hover {
   background-color: rgb(226, 159, 35);
   color: white;
 }

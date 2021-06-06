@@ -8,19 +8,29 @@
 }
 .news-details__title {
   margin-top: 5vh;
-  font-size: 22px;
   color: #574339;
-  font-weight: 700;
+  font-weight: 500;
+  font-size: 24px;
+}
+
+.news-details__date {
+  margin-top: 2vh;
+  color: #7c6f6f;
+  font-weight: 300;
+  display: flex;
+  font-size: 18px;
+  align-items: center;
 }
 
 .news-details__description {
+  width: 100%;
+  white-space: pre-wrap;
+  font-size: 18px;
+  font-family: "Montserrat", sans-serif;
   margin-top: 5vh;
   width: 100%;
-  color: black;
+  color: #574339;
   font-weight: 300;
-  display: flex;
-  text-align: left;
-  align-items: center;
   line-height: 1.5;
   text-indent: 1.5em; /* Отступ первой строки */
   text-align: justify; /* Выравнивание по ширине */

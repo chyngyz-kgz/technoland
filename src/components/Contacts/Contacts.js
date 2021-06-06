@@ -1,11 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Contacts.css'
 import NavBar from '../NavBar/NavBar';
+import { SEND_MAIL_API } from '../../helpers/constants';
 
 import CallIcon from '@material-ui/icons/Call';
 import AlternateEmailIcon from '@material-ui/icons/AlternateEmail';
+import axios from 'axios';
 
 const Contacts = () => {
+    const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+    const [statusMessage, setStatusMessage] = useState('');
+
+    function changesHandler(event) {
+        setFormData({
+            ...formData,
+            [event.target.name]: event.target.value
+        });
+    }
+
+    async function sendFormData(event) {
+        event.preventDefault();
+        const { data } = await axios.post(SEND_MAIL_API, formData);
+        setStatusMessage(data.message);
+        console.log(data);
+    }
+
     return (
         <>
             <NavBar />
@@ -28,22 +47,23 @@ const Contacts = () => {
                 <span className="contact__info"><AlternateEmailIcon /> aizada7878@mail.ru</span>
 
 
-                <form className="contacts__form">
+                <form onSubmit={sendFormData} className="contacts__form">
                     <span className="form__title">ОБРАТНАЯ СВЯЗЬ</span>
                     <div className="form__inputs">
                         <div className="form__input__container">
                             <label>Введите ваше имя *</label>
-                            <input className="form__input" placeholder="Пример: Асанов Усон" />
+                            <input onChange={changesHandler} name="name" className="form__input" placeholder="Пример: Асанов Усон" />
                         </div>
                         <div className="form__input__container">
                             <label>Введите ваш email *</label>
-                            <input className="form__input" placeholder="example@example.com" />
+                            <input onChange={changesHandler} name="email" className="form__input" placeholder="example@example.com" />
                         </div>
                     </div>
                     <div className="form__textarea__container">
                         <label>Введите сообщение *</label>
-                        <textarea className="form__textarea" placeholder="Введите сообщение от 20 до 500 символов" />
+                        <textarea onChange={changesHandler} name="message" className="form__textarea" placeholder="Введите сообщение от 20 до 500 символов" />
                     </div>
+                    <span className="contact-form__error">{statusMessage}</span>
                     <button className="form__submit-btn" type="submit">Отправить сообщение</button>
                 </form>
             </div>
